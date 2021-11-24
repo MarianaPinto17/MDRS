@@ -22,18 +22,19 @@ for index=1:numel(lambdaArray)
 
     % Calculate Average Packet Delay
     APD = mean(APD_lst);
-    APD_conf = norminv(1-alfa/2)*sqrt(var(APD_lst)/N);
+    APD_conf(index) = norminv(1-alfa/2)*sqrt(var(APD_lst)/N);
     fprintf('Av. Packet Delay (ms)= %.2e +-%.2e\n',APD,APD_conf);
 
     APD_Results(index) = APD;
-    APD_Erro(index) = APD_conf;
+
     
 
 end
 
 bar(lambdaArray,APD_Results);
-
 hold on
+APD_Erro = [APD_conf(1) APD_conf(2) APD_conf(3) APD_conf(4)];
+APD_Erro = [-APD_conf(1) -APD_conf(2) APD_conf(3) APD_conf(4)];
 er = errorbar(lambdaArray,APD_Results,APD_Erro,APD_Erro);    
 er.Color = [0 0 0];                            
 er.LineStyle = 'none';
