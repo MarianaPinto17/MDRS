@@ -2,7 +2,8 @@
 % 1.a - C = 10 Mbps and f = 1.000.000 Bytes. Run Simulator1 50 times with a
 % stopping criterion of P = 10000. 90% confidence intervals of the average 
 % delay performance parameter when lambda = 400, 800, 1200, 1600 and 2000 pps.
-
+% Present the average packet delay results in bar charts with the
+% confidence intervals in error bars.
 P = 10000;
 lambdaArray = [400,800,1200,1600,2000];
 C = 10;
@@ -15,9 +16,11 @@ for index=1:numel(lambdaArray)
     APD_lst = zeros(1,N);
     MPD_lst = zeros(1,N);
     TT_lst = zeros(1,N);
+    
     for i = 1:N
         [PL_lst(i),APD_lst(i),MPD_lst(i),TT_lst(i)] = Simulator1(lambdaArray(index),C,f,P);
-    end    
+    end  
+    
     fprintf('Valor %d de labmda:\n',lambdaArray(index));
     % Calculate Average Packet Delay
     APD = mean(APD_lst);
