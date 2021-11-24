@@ -19,20 +19,22 @@ for index=1:numel(lambdaArray)
         [PL_lst(i),APD_lst(i),MPD_lst(i),TT_lst(i)] = Simulator1(lambdaArray(index),C,f,P);
     end    
     fprintf('Valor %d de labmda:\n',lambdaArray(index));
+
     % Calculate Average Packet Delay
     APD = mean(APD_lst);
-    APD_conf = norminv(1-alfa/2)*sqrt(var(APD_lst)/N);
+    APD_conf(index) = norminv(1-alfa/2)*sqrt(var(APD_lst)/N);
     fprintf('Av. Packet Delay (ms)= %.2e +-%.2e\n',APD,APD_conf);
+
     APD_Results(index) = APD;
-    APD_Erro(index) = APD_conf;
+
+    
+
 end
 
-figure(1);
 bar(lambdaArray,APD_Results);
-xlabel("Packet Rate (pps)");
-ylabel("Packet Delay");
-title(["Average Packet Delay"]);
 hold on
+APD_Erro = [APD_conf(1) APD_conf(2) APD_conf(3) APD_conf(4)];
+APD_Erro = [-APD_conf(1) -APD_conf(2) APD_conf(3) APD_conf(4)];
 er = errorbar(lambdaArray,APD_Results,APD_Erro,APD_Erro);    
 er.Color = [0 0 0];                            
 er.LineStyle = 'none';
