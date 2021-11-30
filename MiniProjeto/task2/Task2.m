@@ -394,7 +394,7 @@ hold off
 
 %% 2.f -> novo simulador 4 (Simulator4_f)
 
-fprintf('Alinea E\n');
+fprintf('Alinea F\n');
 
 P = 10000;
 lambda = 1500;
