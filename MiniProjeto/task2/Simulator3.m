@@ -1,4 +1,4 @@
-%% simulador -> Task7
+
 function [PL_d, PL_v, APD_d, APD_v, MPD_d, MPD_v, TT] = Simulator3(lambda,C,f,P,n)
 % INPUT PARAMETERS:
 %  lambda - packet rate (packets/sec)

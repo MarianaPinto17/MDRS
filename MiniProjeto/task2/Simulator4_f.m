@@ -1,5 +1,5 @@
-
-function [PL_d, PL_v, APD_d, APD_v, MPD_d, MPD_v, TT] = Simulator4(lambda,C,f,P,n)
+%% simulador 4 do exercicio 2.f (projeto 1)
+function [PL_d, PL_v, APD_d, APD_v, MPD_d, MPD_v, TT] = Simulator4_f(lambda,C,f,P,n)
 % INPUT PARAMETERS:
 %  lambda - packet rate (packets/sec)
 %  C      - link bandwidth (Mbps)
