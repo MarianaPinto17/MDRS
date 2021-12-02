@@ -30,7 +30,8 @@ end
 
 figure(1);
 bar(Carray,APD_Resultsc);
-xlabel("Packet Rate (pps)");
+grid on
+xlabel("Link bandwidth (Mbps)");
 ylabel("Packet Delay");
 title(["Average Packet Delay"]);
 hold on

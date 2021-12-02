@@ -1,4 +1,4 @@
-function [PL , APD , MPD , TT] = Simulator1New(lambda,C,f,P)
+function [PL , APD,APD_64,APD_110,APD_1518 , MPD , TT] = Simulator1New(lambda,C,f,P)
 % INPUT PARAMETERS:
 %  lambda - packet rate (packets/sec)
 %  C      - link bandwidth (Mbps)
@@ -9,8 +9,6 @@ function [PL , APD , MPD , TT] = Simulator1New(lambda,C,f,P)
 %  APD  - average packet delay (milliseconds)
 %  MPD  - maximum packet delay (milliseconds)
 %  TT   - transmitted throughput (Mbps)
-
-packetSize=[64 110 1518]; % em bytes
 
 %Events:
 ARRIVAL= 0;       % Arrival of a packet            
@@ -25,8 +23,14 @@ QUEUE= [];          % Size and arriving time instant of each packet in the queue
 TOTALPACKETS= 0;       % No. of packets arrived to the system
 LOSTPACKETS= 0;        % No. of packets dropped due to buffer overflow
 TRANSMITTEDPACKETS= 0; % No. of transmitted packets
+TRANSMITTEDPACKETS_64= 0;   % No. of transmitted packets with 64 packetSize
+TRANSMITTEDPACKETS_110= 0;  % No. of transmitted packets with 110 packetSize
+TRANSMITTEDPACKETS_1518= 0; % No. of transmitted packets with 1518 packetSize
 TRANSMITTEDBYTES= 0;   % Sum of the Bytes of transmitted packets
 DELAYS= 0;             % Sum of the delays of transmitted packets
+DELAYS_64= 0;          % Sum of the delays of transmitted packets with 64 packetSize
+DELAYS_110= 0;         % Sum of the delays of transmitted packets with 110 packetSize
+DELAYS_1518= 0;        % Sum of the delays of transmitted packets with 1518 packetSize
 MAXDELAY= 0;           % Maximum delay among all transmitted packets
 
 % Initializing the simulation clock:
@@ -61,6 +65,18 @@ while TRANSMITTEDPACKETS<P               % Stopping criterium
                 end
             end
         case DEPARTURE                     % If first event is a DEPARTURE
+            
+            if PacketSize==64
+                TRANSMITTEDPACKETS_64= TRANSMITTEDPACKETS_64 + 1;
+                DELAYS_64= DELAYS_64 + (Clock - ArrivalInstant);
+            elseif PacketSize==110
+                TRANSMITTEDPACKETS_110= TRANSMITTEDPACKETS_110 + 1;
+                DELAYS_110= DELAYS_110 + (Clock - ArrivalInstant);
+            elseif PacketSize==1518
+                TRANSMITTEDPACKETS_1518= TRANSMITTEDPACKETS_1518 + 1;
+                DELAYS_1518= DELAYS_1518 + (Clock - ArrivalInstant);
+            end
+
             TRANSMITTEDBYTES= TRANSMITTEDBYTES + PacketSize;
             DELAYS= DELAYS + (Clock - ArrivalInstant);
             if Clock - ArrivalInstant > MAXDELAY
@@ -80,8 +96,10 @@ end
 %Performance parameters determination:
 PL= 100*LOSTPACKETS/TOTALPACKETS;      % in %
 
-% acho que e aqui
 APD= 1000*DELAYS/TRANSMITTEDPACKETS;   % in milliseconds
+APD_64= 1000*DELAYS_64/TRANSMITTEDPACKETS_64;
+APD_110= 1000*DELAYS_110/TRANSMITTEDPACKETS_110;
+APD_1518= 1000*DELAYS_1518/TRANSMITTEDPACKETS_1518;
 
 MPD= 1000*MAXDELAY;                    % in milliseconds
 TT= 10^(-6)*TRANSMITTEDBYTES*8/Clock;  % in Mbps
@@ -90,8 +108,8 @@ end
 
 function out= GeneratePacketSize()
     aux= rand();
-    %aux2= [65:109 111:1517];
-    aux2= [64 110 1518];
+    aux2= [65:109 111:1517];
+    %aux2= [64 110 1518];
     if aux <= 0.19
         out= 64;
     elseif aux <= 0.19 + 0.23
@@ -102,3 +120,5 @@ function out= GeneratePacketSize()
         out = aux2(randi(length(aux2)));
     end
 end
+
+

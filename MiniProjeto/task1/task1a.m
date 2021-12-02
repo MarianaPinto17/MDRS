@@ -32,9 +32,10 @@ end
 
 figure(1);
 bar(lambdaArray,APD_Results);
+grid on
 xlabel("Packet Rate (pps)");
 ylabel("Packet Delay");
-title(["Average Packet Delay"]);
+title(["Average Packet Delay - Alinea A"]);
 hold on
 er = errorbar(lambdaArray,APD_Results,APD_Erro,APD_Erro);    
 er.Color = [0 0 0];                            

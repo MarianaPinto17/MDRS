@@ -42,9 +42,11 @@ end
 
 figure(1);
 bar(farray,APD_Resultsb);
-xlabel("Packet Rate (pps)");
+grid on 
+xlabel("Queue size (Bytes)");
+ylim([0 11])
 ylabel("Packet Delay");
-title(["Average Packet Delay"]);
+title(["Average Packet Delay - Alinea B"]);
 hold on
 er = errorbar(farray,APD_Resultsb,APD_Errob,APD_Errob);    
 er.Color = [0 0 0];                            
@@ -53,9 +55,11 @@ hold off
 
 figure(2);
 bar(farray,PL_Resultsb);
-xlabel("Packet Rate (pps)");
+grid on
+xlabel("Queue size (Bytes)");
+ylim([0 11])
 ylabel("Packet Lost");
-title(["Average Packet Lost"]);
+title(["Average Packet Lost - Alinea B"]);
 hold on
 er = errorbar(farray,PL_Resultsb,PL_Errob,PL_Errob);    
 er.Color = [0 0 0];                            
