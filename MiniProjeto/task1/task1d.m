@@ -1,6 +1,9 @@
+%close all, clear all, clc
+
 % lambda = 1800 pps and f = 1.000.000 Bytes. N=50, P = 10000,
 % 90% confidence intervals and C = 10, 20, 30 and 40 Mbps. 
 
+fprintf('Task 1 - Alinea D\n');
 lambda = 1800;
 Carray = [10*10^6, 20*10^6, 30*10^6, 40*10^6];
 f = 1000000;

@@ -1,3 +1,5 @@
+%close all, clear all, clc
+
 % 2.b -> simulador 4
 % lambda = 1500 pps, C = 10 Mbps and f = 1.000.000 Bytes. Run Simulator4
 % 50 times with a stopping criterion of P = 10000 each run and compute the 
@@ -8,7 +10,7 @@
 % average VoIP packet delay results in another figure (in both cases, in
 % bar charts with the confidence intervals in error bars).
 
-fprintf('Alinea B\n');
+fprintf('Task 2 - Alinea B\n');
 
 P = 10000;
 lambda = 1500;

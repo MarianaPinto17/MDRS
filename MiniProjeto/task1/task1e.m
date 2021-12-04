@@ -1,7 +1,12 @@
+%close all, clear all, clc
+
 % lambda = 1800 pps and f = 1.000.000 Bytes. N=50, P = 10000,
 % 90% confidence intervals and C = 10, 20, 30 and 40 Mbps. 
 % Present the average packet delay results in bar charts with the confidence
 % intervals in error bars. 
+
+fprintf('Task 1 - Alinea E\n');
+
 P = 10000;
 lambda = 1800;
 Carray = [10, 20, 30, 40];

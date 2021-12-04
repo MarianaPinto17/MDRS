@@ -1,10 +1,12 @@
-
+%close all, clear all, clc
 % 1.b - lambda = 1800 pps and C = 10 Mbps, P = 10000 and 90% confidence 
 % intervals of the average delay and packet loss performance parameters 
 % when f = 100.000, 20.000, 10.000 and 2.000 Bytes. 
 % Present the average packet delay results in one figure and the average 
 % packet loss results in another figure (in both cases, in bar charts
 % with the confidence intervals in error bars)
+
+fprintf('Task 1 - Alinea B\n');
 
 P = 10000;
 lambda = 1800;

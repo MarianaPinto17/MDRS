@@ -1,3 +1,5 @@
+%close all, clear all, clc
+
 % 2.f -> novo simulador 4 (Simulator4_f)
 % lambda = 1500 pps, C = 10 Mbps and f = 10.000 Bytes. Run new Simulator4
 % 50 times with a stopping criterion of P = 10000 each run and compute the
@@ -9,7 +11,7 @@
 % and VoIP packet loss) in different figures (in all cases, in bar charts 
 % with the confidence intervals in error bars)
 
-fprintf('Alinea F\n');
+fprintf('Task 2 - Alinea F\n');
 
 P = 10000;
 lambda = 1500;
