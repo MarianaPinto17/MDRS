@@ -109,7 +109,6 @@ end
 function out= GeneratePacketSize()
     aux= rand();
     aux2= [65:109 111:1517];
-    %aux2= [64 110 1518];
     if aux <= 0.19
         out= 64;
     elseif aux <= 0.19 + 0.23
