@@ -81,7 +81,6 @@ while TRANSMITTEDPACKETS<P               % Stopping criterium
                     STATE= 1;
                     EventList = [EventList; DEPARTURE, Clock + 8*PacketSize/(C*10^6), PacketSize, Clock,packetType];
                 else
-                    %if QUEUEOCCUPATION + PacketSize <= f
                     % Data packets are accepted in the queue only if the total 
                     % queue occupation does not become higher than 90% 
                     if QUEUEOCCUPATION + PacketSize <= (f*0.9)
@@ -101,15 +100,10 @@ while TRANSMITTEDPACKETS<P               % Stopping criterium
                 else
                     if QUEUEOCCUPATION + PacketSize <= f
                         QUEUE= [QUEUE;PacketSize , Clock,packetType]; 
-                       
-                        % ex 7.e -> por os pacotes VoIP primeiro que os 
+                        % guiao 7.e -> por os pacotes VoIP primeiro que os 
                         % Data mas entre os voip têm que ter na mesma entrada e saida
                         QUEUE = sortrows(QUEUE,3,'descend'); 
-% a funcao sortrows ordena por ondem todos os pacotes, pelos 0 e depois pelo 1 (NAO e o que
-% queremos) por isso ordenamos de maneira descend ou seja ficamos com os pacores 1 -> VoIP primeiro
-% e depois os de dados (0). Os de VoIP nao ficam todos trocados na fila
-% porque a funcao e coerente (os que entram primeiro sao os primeiros a ser
-% ordenados dentro dos pacotes VoIP e dados
+
                         QUEUEOCCUPATION= QUEUEOCCUPATION + PacketSize;
                     else
                         LOSTPACKETS_VoIP= LOSTPACKETS_VoIP + 1;
