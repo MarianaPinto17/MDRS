@@ -28,16 +28,7 @@ for index=1:numel(Carray)
     APD_Erroc(index) = APD_conf;
 end
 
-figure(1);
-bar(Carray,APD_Resultsc);
-xlabel("Packet Rate (pps)");
-ylabel("Packet Delay");
-title(["Average Packet Delay"]);
-hold on
-er = errorbar(Carray,APD_Resultsc,APD_Erroc,APD_Erroc);    
-er.Color = [0 0 0];                            
-er.LineStyle = 'none';
-hold off
+
 
 
 % conclusao : na 1c tinhamos valores random de 64 a 1518 de tamanho de
