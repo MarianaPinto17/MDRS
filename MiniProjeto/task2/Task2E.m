@@ -1,3 +1,5 @@
+%close all, clear all, clc
+
 % 2.e -> simulador 4
 % lambda = 1500 pps, C = 10 Mbps and f = 10.000 Bytes. Run Simulator4
 % 50 times with a stopping criterion of P = 10000 each run and compute the
@@ -9,7 +11,7 @@
 % and VoIP packet loss) in different figures (in all cases, in bar charts 
 % with the confidence intervals in error bars)
 
-fprintf('Alinea E\n');
+fprintf('Task 2 - Alinea E\n');
 
 P = 10000;
 lambda = 1500;
@@ -73,7 +75,7 @@ end
 % figure for Calculate Data Packet Loss
 figure(1);
 bar(n,PL_Results_data);
-title("Data Packet Loss (%) - Alinea D");
+title("Data Packet Loss (%) - Alinea E");
 grid on
 xlabel("Number of VoIP packets flows");
 ylim([0 1.7])
@@ -87,7 +89,7 @@ hold off
 % figure for Calculate VoIP Packet Loss
 figure(2);
 bar(n,PL_Results_VoIP);
-title("VoIP Packet Loss (%) - Alinea D");
+title("VoIP Packet Loss (%) - Alinea E");
 grid on
 xlabel("Number of VoIP packets flows");
 ylim([0 1.7])
@@ -101,7 +103,7 @@ hold off
 % figure for Average Data Packet Delay 
 figure(3);
 bar(n,APD_Results_data);
-title("Data Av. Packet Delay (ms) - Alinea D");
+title("Data Av. Packet Delay (ms) - Alinea E");
 grid on 
 xlabel("Number of VoIP packets flows");
 ylim([0 4.3])
@@ -115,7 +117,7 @@ hold off
 % figure for Average VoIP Packet Delay  
 figure(4);
 bar(n,APD_Results_VoIP);
-title("VoIP Av. Packet Delay (ms) - Alinea D");
+title("VoIP Av. Packet Delay (ms) - Alinea E");
 grid on 
 xlabel("Number of VoIP packets flows");
 ylim([0 4.3])

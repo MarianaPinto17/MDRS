@@ -1,10 +1,12 @@
-
+%close all, clear all, clc
 % 1.b - lambda = 1800 pps and C = 10 Mbps, P = 10000 and 90% confidence 
 % intervals of the average delay and packet loss performance parameters 
 % when f = 100.000, 20.000, 10.000 and 2.000 Bytes. 
 % Present the average packet delay results in one figure and the average 
 % packet loss results in another figure (in both cases, in bar charts
 % with the confidence intervals in error bars)
+
+fprintf('Task 1 - Alinea B\n');
 
 P = 10000;
 lambda = 1800;
@@ -42,9 +44,11 @@ end
 
 figure(1);
 bar(farray,APD_Resultsb);
-xlabel("Packet Rate (pps)");
+grid on 
+xlabel("Queue size (Bytes)");
+ylim([0 11])
 ylabel("Packet Delay");
-title(["Average Packet Delay"]);
+title(["Average Packet Delay - Alinea B"]);
 hold on
 er = errorbar(farray,APD_Resultsb,APD_Errob,APD_Errob);    
 er.Color = [0 0 0];                            
@@ -53,9 +57,11 @@ hold off
 
 figure(2);
 bar(farray,PL_Resultsb);
-xlabel("Packet Rate (pps)");
+grid on
+xlabel("Queue size (Bytes)");
+ylim([0 11])
 ylabel("Packet Lost");
-title(["Average Packet Lost"]);
+title(["Average Packet Lost - Alinea B"]);
 hold on
 er = errorbar(farray,PL_Resultsb,PL_Errob,PL_Errob);    
 er.Color = [0 0 0];                            

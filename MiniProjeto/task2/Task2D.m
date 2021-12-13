@@ -1,3 +1,5 @@
+%close all, clear all, clc
+
 % 2.d -> silumador 3
 % lambda = 1500 pps, C = 10 Mbps and f = 10.000 Bytes. Run Simulator3
 % 50 times with a stopping criterion of P = 10000 each run and compute the
@@ -9,7 +11,7 @@
 % and VoIP packet loss) in different figures (in all cases, in bar charts 
 % with the confidence intervals in error bars)
 
-fprintf('Alinea D\n');
+fprintf('Task 2 - Alinea D\n');
 
 P = 10000;
 lambda = 1500;

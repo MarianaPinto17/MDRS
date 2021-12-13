@@ -73,7 +73,7 @@ while TRANSMITTEDPACKETS<P               % Stopping criterium
     switch Event
         case ARRIVAL                     % If first event is an ARRIVAL
             TOTALPACKETS = TOTALPACKETS +1;
-            if packetType == 0 % Data
+            if packetType == 0 % Data             
                 TOTALPACKETS_data= TOTALPACKETS_data+1;
                 tmp= Clock + exprnd(1/lambda);
                 EventList = [EventList; ARRIVAL, tmp, GeneratePacketSize_Data(), tmp,packetType];
@@ -81,13 +81,15 @@ while TRANSMITTEDPACKETS<P               % Stopping criterium
                     STATE= 1;
                     EventList = [EventList; DEPARTURE, Clock + 8*PacketSize/(C*10^6), PacketSize, Clock,packetType];
                 else
-                    if QUEUEOCCUPATION + PacketSize <= f
+                    % Data packets are accepted in the queue only if the total 
+                    % queue occupation does not become higher than 90% 
+                    if QUEUEOCCUPATION + PacketSize <= (f*0.9)
                         QUEUE= [QUEUE;PacketSize , Clock,packetType];
                         QUEUEOCCUPATION= QUEUEOCCUPATION + PacketSize;
                     else
                         LOSTPACKETS_data= LOSTPACKETS_data + 1;
                     end
-                end
+                end 
             else %VoIP
                 TOTALPACKETS_VoIP= TOTALPACKETS_VoIP+1;
                 time = Clock + unifrnd (0.016,0.024); % 20000 ms = 0.02s
@@ -98,15 +100,10 @@ while TRANSMITTEDPACKETS<P               % Stopping criterium
                 else
                     if QUEUEOCCUPATION + PacketSize <= f
                         QUEUE= [QUEUE;PacketSize , Clock,packetType]; 
-                       
-                        % ex 7.e -> por os pacotes VoIP primeiro que os 
+                        % guiao 7.e -> por os pacotes VoIP primeiro que os 
                         % Data mas entre os voip têm que ter na mesma entrada e saida
                         QUEUE = sortrows(QUEUE,3,'descend'); 
-% a funcao sortrows ordena por ondem todos os pacotes, pelos 0 e depois pelo 1 (NAO e o que
-% queremos) por isso ordenamos de maneira descend ou seja ficamos com os pacores 1 -> VoIP primeiro
-% e depois os de dados (0). Os de VoIP nao ficam todos trocados na fila
-% porque a funcao e coerente (os que entram primeiro sao os primeiros a ser
-% ordenados dentro dos pacotes VoIP e dados
+
                         QUEUEOCCUPATION= QUEUEOCCUPATION + PacketSize;
                     else
                         LOSTPACKETS_VoIP= LOSTPACKETS_VoIP + 1;

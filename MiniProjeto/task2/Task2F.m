@@ -1,3 +1,5 @@
+%close all, clear all, clc
+
 % 2.f -> novo simulador 4 (Simulator4_f)
 % lambda = 1500 pps, C = 10 Mbps and f = 10.000 Bytes. Run new Simulator4
 % 50 times with a stopping criterion of P = 10000 each run and compute the
@@ -9,7 +11,7 @@
 % and VoIP packet loss) in different figures (in all cases, in bar charts 
 % with the confidence intervals in error bars)
 
-fprintf('Alinea F\n');
+fprintf('Task 2 - Alinea F\n');
 
 P = 10000;
 lambda = 1500;
@@ -73,10 +75,10 @@ end
 % figure for Calculate Data Packet Loss
 figure(1);
 bar(n,PL_Results_data);
-title("Data Packet Loss (%) - Alinea D");
+title("Data Packet Loss (%) - Alinea F");
 grid on
 xlabel("Number of VoIP packets flows");
-ylim([0 1.7])
+ylim([0 2])
 ylabel("Data Paket Delay");
 hold on
 er1 = errorbar(n,PL_Results_data,PL_Erro_data,PL_Erro_data);    
@@ -87,10 +89,10 @@ hold off
 % figure for Calculate VoIP Packet Loss
 figure(2);
 bar(n,PL_Results_VoIP);
-title("VoIP Packet Loss (%) - Alinea D");
+title("VoIP Packet Loss (%) - Alinea F");
 grid on
 xlabel("Number of VoIP packets flows");
-ylim([0 1.7])
+ylim([0 2])
 ylabel("VoIP Paket Delay");
 hold on
 er1 = errorbar(n,PL_Results_VoIP,PL_Erro_VoIP,PL_Erro_VoIP);    
@@ -101,10 +103,10 @@ hold off
 % figure for Average Data Packet Delay 
 figure(3);
 bar(n,APD_Results_data);
-title("Data Av. Packet Delay (ms) - Alinea D");
+title("Data Av. Packet Delay (ms) - Alinea F");
 grid on 
 xlabel("Number of VoIP packets flows");
-ylim([0 4.3])
+ylim([0 4])
 ylabel("Data Paket Delay");
 hold on
 er1 = errorbar(n,APD_Results_data,APD_Erro_data,APD_Erro_data);    
@@ -115,10 +117,10 @@ hold off
 % figure for Average VoIP Packet Delay  
 figure(4);
 bar(n,APD_Results_VoIP);
-title("VoIP Av. Packet Delay (ms) - Alinea D");
+title("VoIP Av. Packet Delay (ms) - Alinea F");
 grid on 
 xlabel("Number of VoIP packets flows");
-ylim([0 4.3])
+ylim([0 4])
 ylabel("VoIP Paket Delay");
 hold on
 er2 = errorbar(n,APD_Results_VoIP,APD_Erro_VoIP,APD_Erro_VoIP);    
