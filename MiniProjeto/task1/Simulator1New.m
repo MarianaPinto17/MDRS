@@ -1,3 +1,4 @@
+
 function [PL , APD,APD_64,APD_110,APD_1518 , MPD , TT] = Simulator1New(lambda,C,f,P)
 % INPUT PARAMETERS:
 %  lambda - packet rate (packets/sec)
@@ -53,17 +54,43 @@ while TRANSMITTEDPACKETS<P               % Stopping criterium
             TOTALPACKETS= TOTALPACKETS+1;
             tmp= Clock + exprnd(1/lambda);
             EventList = [EventList; ARRIVAL, tmp, GeneratePacketSize(), tmp];
-            if STATE==0
-                STATE= 1;
-                EventList = [EventList; DEPARTURE, Clock + 8*PacketSize/(C*10^6), PacketSize, Clock];
-            else
-                if QUEUEOCCUPATION + PacketSize <= f
-                    QUEUE= [QUEUE;PacketSize , Clock];
-                    QUEUEOCCUPATION= QUEUEOCCUPATION + PacketSize;
+            if PacketSize==64
+                if STATE==0
+                    STATE= 1;
+                    EventList = [EventList; DEPARTURE, Clock + 8*PacketSize/(C*10^6), PacketSize, Clock];
                 else
-                    LOSTPACKETS= LOSTPACKETS + 1;
+                    if QUEUEOCCUPATION + PacketSize <= f
+                        QUEUE= [QUEUE;PacketSize , Clock];
+                        QUEUEOCCUPATION= QUEUEOCCUPATION + PacketSize;
+                    else
+                        LOSTPACKETS= LOSTPACKETS + 1;
+                    end
                 end
-            end
+            elseif PacketSize==110
+                if STATE==0
+                    STATE= 1;
+                    EventList = [EventList; DEPARTURE, Clock + 8*PacketSize/(C*10^6), PacketSize, Clock];
+                else
+                    if QUEUEOCCUPATION + PacketSize <= f
+                        QUEUE= [QUEUE;PacketSize , Clock];
+                        QUEUEOCCUPATION= QUEUEOCCUPATION + PacketSize;
+                    else
+                        LOSTPACKETS= LOSTPACKETS + 1;
+                    end
+                end
+            elseif PacketSize==1518
+                if STATE==0
+                    STATE= 1;
+                    EventList = [EventList; DEPARTURE, Clock + 8*PacketSize/(C*10^6), PacketSize, Clock];
+                else
+                    if QUEUEOCCUPATION + PacketSize <= f
+                        QUEUE= [QUEUE;PacketSize , Clock];
+                        QUEUEOCCUPATION= QUEUEOCCUPATION + PacketSize;
+                    else
+                        LOSTPACKETS= LOSTPACKETS + 1;
+                    end
+                end
+            end    
         case DEPARTURE                     % If first event is a DEPARTURE
             
             if PacketSize==64
@@ -78,17 +105,46 @@ while TRANSMITTEDPACKETS<P               % Stopping criterium
             end
 
             TRANSMITTEDBYTES= TRANSMITTEDBYTES + PacketSize;
-            DELAYS= DELAYS + (Clock - ArrivalInstant);
-            if Clock - ArrivalInstant > MAXDELAY
-                MAXDELAY= Clock - ArrivalInstant;
-            end
-            TRANSMITTEDPACKETS= TRANSMITTEDPACKETS + 1;
-            if QUEUEOCCUPATION > 0
-                EventList = [EventList; DEPARTURE, Clock + 8*QUEUE(1,1)/(C*10^6), QUEUE(1,1), QUEUE(1,2)];
-                QUEUEOCCUPATION= QUEUEOCCUPATION - QUEUE(1,1);
-                QUEUE(1,:)= [];
-            else
-                STATE= 0;
+            if PacketSize==64
+                DELAYS64= DELAYS + (Clock - ArrivalInstant);
+                if Clock - ArrivalInstant > MAXDELAY
+                    MAXDELAY= Clock - ArrivalInstant;
+                end
+                TRANSMITTEDPACKETS= TRANSMITTEDPACKETS + 1;
+                if QUEUEOCCUPATION > 0
+                    EventList = [EventList; DEPARTURE, Clock + 8*QUEUE(1,1)/(C*10^6), QUEUE(1,1), QUEUE(1,2)];
+                    QUEUEOCCUPATION= QUEUEOCCUPATION - QUEUE(1,1);
+                    QUEUE(1,:)= [];
+                else
+                    STATE= 0;
+                end
+            elseif PacketSize == 110
+
+                DELAYS110= DELAYS + (Clock - ArrivalInstant);
+                if Clock - ArrivalInstant > MAXDELAY
+                    MAXDELAY= Clock - ArrivalInstant;
+                end
+                TRANSMITTEDPACKETS= TRANSMITTEDPACKETS + 1;
+                if QUEUEOCCUPATION > 0
+                    EventList = [EventList; DEPARTURE, Clock + 8*QUEUE(1,1)/(C*10^6), QUEUE(1,1), QUEUE(1,2)];
+                    QUEUEOCCUPATION= QUEUEOCCUPATION - QUEUE(1,1);
+                    QUEUE(1,:)= [];
+                else
+                    STATE= 0;
+                end
+            elseif PacketSize == 1518
+                DELAYS1158= DELAYS + (Clock - ArrivalInstant);
+                if Clock - ArrivalInstant > MAXDELAY
+                    MAXDELAY= Clock - ArrivalInstant;
+                end
+                TRANSMITTEDPACKETS= TRANSMITTEDPACKETS + 1;
+                if QUEUEOCCUPATION > 0
+                    EventList = [EventList; DEPARTURE, Clock + 8*QUEUE(1,1)/(C*10^6), QUEUE(1,1), QUEUE(1,2)];
+                    QUEUEOCCUPATION= QUEUEOCCUPATION - QUEUE(1,1);
+                    QUEUE(1,:)= [];
+                else
+                    STATE= 0;
+                end
             end
     end
 end
@@ -119,5 +175,3 @@ function out= GeneratePacketSize()
         out = aux2(randi(length(aux2)));
     end
 end
-
-

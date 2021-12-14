@@ -86,6 +86,7 @@ er.Color = [0 0 0];
 er.LineStyle = 'none';
 hold off
 
+
 figure(2);
 bar(Carray,APD_Resultsc_110);
 grid on 
@@ -111,13 +112,6 @@ er = errorbar(Carray,APD_Resultsc_1518,APD_Erroc_1518,APD_Erroc_1518);
 er.Color = [0 0 0];                            
 er.LineStyle = 'none';
 hold off
-
-%% ja nao sei se esta bem isto....
-% conclusao : na 1c tinhamos valores random de 64 a 1518 de tamanho de
-% pacotes na 1d vamos ter so 64 ou 110 ou 1518 como o C agora tem pacotes
-% fixos de tamanho e nos sabemos a prob de cada pacote o avg_delay cai
-% bastante porque o canal nao fica tao cheio (a capacidade do link nao vai
-% ate ao maximo)
 
 
 
