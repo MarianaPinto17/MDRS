@@ -114,9 +114,9 @@ figure(1)
 grid on
 plot(sort(allValues));
 title("Random Algorithm - Task 2.A")
-fprintf("Energy consumption value of the best solution = %d \n", bestEnergy);
+fprintf("Energy consumption value of the best solution = %.1f \n", bestEnergy);
 fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %d \n", mean(allValues));
+fprintf("Average quality of all solutions generated = %.1f \n", mean(allValues));
 
 
 fprintf("\nSolution random with 10 shortest routing paths\n");
@@ -126,7 +126,7 @@ sol= zeros(1,nFlows);
 allValues= [];
 while toc(t)<10
     for i= 1:nFlows
-        n = min(10,nSP(i)); %correr so 6 vezes -> os primeiros 10
+        n = min(10,nSP(i)); %correr so 10 vezes -> os primeiros 10
         sol(i)= randi(n);
     end
     Loads= calculateLinkLoads(nNodes,Links,T,sP,sol);
@@ -155,9 +155,9 @@ end
 hold on
 grid on
 plot(sort(allValues));
-fprintf("Energy consumption value of the best solution = %d \n", bestEnergy);
+fprintf("Energy consumption value of the best solution = %.1f \n", bestEnergy);
 fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %d \n", mean(allValues));
+fprintf("Average quality of all solutions generated = %.1f \n", mean(allValues));
 
 
 fprintf("\nSolution random with 5 shortest routing paths\n");
@@ -167,7 +167,7 @@ sol= zeros(1,nFlows);
 allValues= [];
 while toc(t)<10
     for i= 1:nFlows
-        n = min(5,nSP(i)); %correr so 6 vezes -> os primeiros 10
+        n = min(5,nSP(i)); %correr so 5 vezes -> os primeiros 5
         sol(i)= randi(n);
     end
     Loads= calculateLinkLoads(nNodes,Links,T,sP,sol);
@@ -197,6 +197,6 @@ hold on
 grid on
 plot(sort(allValues));
 legend('Random with all possible','Random with 10 shortest','Random with 5 shortest',Location="southeast");
-fprintf("Energy consumption value of the best solution = %d \n", bestEnergy);
+fprintf("Energy consumption value of the best solution = %.1f \n", bestEnergy);
 fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %d \n", mean(allValues));
+fprintf("Average quality of all solutions generated = %.1f \n", mean(allValues));

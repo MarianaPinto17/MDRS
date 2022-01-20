@@ -57,7 +57,7 @@ Alog= -log(A);
 
 [sP1 a1 sP2 a2]= calculateDisjointPaths(Alog,T);
 
-clc
+
 for i= 1:nFlows
     fprintf('Flow %d:\n',i);
     fprintf('   First path: %d',sP1{i}{1}(1));

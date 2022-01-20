@@ -110,9 +110,9 @@ hold on
 grid on
 plot(sort(allValues)); 
 title("Greedy Randomized - Task 1.C")
-fprintf("Worst link load value of the best solution = %d Gbps\n", bestLoad);
+fprintf("Worst link load value of the best solution = %.2f Gbps\n", bestLoad);
 fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %d Gbps\n", mean(allValues));
+fprintf("Average quality of all solutions generated = %.2f Gbps\n", mean(allValues));
 
 
 fprintf("\nSolution greedy ramdomized using 10 shortest routing paths\n");
@@ -151,9 +151,9 @@ end
 hold on 
 grid on
 plot(sort(allValues));
-fprintf("Worst link load value of the best solution = %d Gbps\n", bestLoad);
+fprintf("Worst link load value of the best solution = %.2f Gbps\n", bestLoad);
 fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %d Gbps\n", mean(allValues));
+fprintf("Average quality of all solutions generated = %.2f Gbps\n", mean(allValues));
 
 
 fprintf("\nSolution greedy randomized using 5 shortest routing paths\n");
@@ -193,6 +193,6 @@ hold on
 grid on
 plot(sort(allValues));
 legend('Greedy randomized using all possible','Greedy randomized using 10 shortest','Greedy randomized using 5 shortest',Location="southeast");
-fprintf("Worst link load value of the best solution = %d Gbps\n", bestLoad);
+fprintf("Worst link load value of the best solution = %.2f Gbps\n", bestLoad);
 fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %d Gbps\n", mean(allValues));
+fprintf("Average quality of all solutions generated = %.2f Gbps\n", mean(allValues));
