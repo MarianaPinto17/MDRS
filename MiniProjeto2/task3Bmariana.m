@@ -40,7 +40,7 @@ T= [1  3  1.0 1.0
     5  9  1.6 1.9
     6 10  1.4 1.6];
 
-nNodes= 9;
+nNodes= 10;
 nLinks= size(Links,1);
 nFlows= size(T,1);
 
@@ -62,7 +62,7 @@ A = MTBF./(MTBF+24); % a= availability
 A(isnan(A))=0; % quando a matriz a tiver Nan mete essa posicao a 0 em vez do Nan
 
 AuxL = -log(A)*100;
-[sP nSP]= calculatePaths(L,T,1); %retorna o 1º caminho para cada link que e o melhor
+[sP nSP sP2 nSP2]= calculateDisjointPaths(AuxL,T);
 
 for i=1:nFlows
     aux = cell2mat(sP{1});
@@ -72,9 +72,6 @@ for i=1:nFlows
         AuxL(aux(j-1),aux(j))= inf;
     end
 end
-
-[sP2 nSP2]= calculateDisjointPaths(AuxL,T);
-
 %sP sao os caminhos e o nSp sao os custos dos caminhos sP
 av = ones(1,nFlows); %avalibility tudo a 1 - inicializacao
 for i = 1:nFlows
