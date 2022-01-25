@@ -69,10 +69,10 @@ n= 100;
 
 for i = 1:nFlows
     aux = size(sP{i});
-    tmp = aux(:,2);
+    meme = ver(:,2);
      
-    for j=1:numel(tmp)
-        fprintf('Fluxo %d -> Number of different routing paths: %d\n',i, tmp(j));
+    for j=1:numel(meme)
+        fprintf('Fluxo %d -> Number of different routing paths: %d\n',i, meme(j));
     end
 end
 
