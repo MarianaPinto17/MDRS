@@ -85,6 +85,9 @@ for i = 1:nFlows
     end
 end
 
-bandwith= calculateLinkLoads1plus1(nNodes,Links,T,sP,sP2)
+bandwith= calculateLinkLoads1to1(nNodes,Links,T,sP,sP2)
 totalbandwith= sum(sum(bandwith(:,3:4)))
+
+[~, index] = max(bandwith(:,3:4));
+maxbandwith = bandwith(index,:)
 

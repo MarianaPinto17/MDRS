@@ -40,7 +40,7 @@ T= [1  3  1.0 1.0
     5  9  1.6 1.9
     6 10  1.4 1.6];
 
-nNodes= 9;
+nNodes= 10;
 nLinks= size(Links,1);
 nFlows= size(T,1);
 

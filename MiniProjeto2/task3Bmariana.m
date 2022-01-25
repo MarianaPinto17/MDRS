@@ -1,4 +1,3 @@
-
 clear all;
 close all;
 
@@ -12,7 +11,6 @@ Nodes= [30 70
        400 310
        220 370
        550 380];
-   
 Links= [1 2
         1 5
         2 3
@@ -29,7 +27,6 @@ Links= [1 2
         7 9
         8 9
         9 10];
-
 T= [1  3  1.0 1.0
     1  4  0.7 0.5
     2  7  2.4 1.5
@@ -39,11 +36,9 @@ T= [1  3  1.0 1.0
     5  8  2.1 2.5
     5  9  1.6 1.9
     6 10  1.4 1.6];
-
 nNodes= 10;
 nLinks= size(Links,1);
 nFlows= size(T,1);
-
 co= Nodes(:,1)+j*Nodes(:,2);
 L= inf(nNodes);    %Square matrix with arc lengths (in Km)
 for i=1:nNodes
@@ -55,15 +50,12 @@ for i=1:nLinks
     L(Links(i,2),Links(i,1))= d+5; %Km
 end
 L= round(L);  %Km
-
 fprintf("Task 3 - Alinea A\n");
 MTBF = (450*360*24)./L;
 A = MTBF./(MTBF+24); % a= availability
 A(isnan(A))=0; % quando a matriz a tiver Nan mete essa posicao a 0 em vez do Nan
-
 AuxL = -log(A)*100;
 [sP nSP sP2 nSP2]= calculateDisjointPaths(AuxL,T);
-
 for i=1:nFlows
     aux = cell2mat(sP{1});
     arr = size(aux);
