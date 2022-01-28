@@ -2,6 +2,7 @@ clear all;
 close all;
 
 fprintf("Task 1 - Alinea B\n");
+
 Nodes= [30 70
        350 40
        550 180

@@ -114,7 +114,6 @@ fprintf("Worst link load value of the best solution = %.2f Gbps\n", bestLoad);
 fprintf("Number of solutions generated = %d \n", length(allValues));
 fprintf("Average quality of all solutions generated = %.2f Gbps\n", mean(allValues));
 
-
 fprintf("\nSolution greedy ramdomized using 10 shortest routing paths\n");
 t= tic;
 bestLoad= inf;
