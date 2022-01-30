@@ -1,18 +1,21 @@
 clear all;
 close all;
 
-Nodes= [20 60
-       250 30
-       550 150
-       310 100
-       100 130
-       580 230
-       120 190
-       400 220
-       220 280];
+fprintf("Task 2 - Alinea C\n");
+Nodes= [30 70
+       350 40
+       550 180
+       310 130
+       100 170
+       540 290
+       120 240
+       400 310
+       220 370
+       550 380];
    
 Links= [1 2
         1 5
+        2 3
         2 4
         3 4
         3 6
@@ -21,20 +24,23 @@ Links= [1 2
         4 8
         5 7
         6 8
+        6 10
         7 8
         7 9
-        8 9];
+        8 9
+        9 10];
 
 T= [1  3  1.0 1.0
     1  4  0.7 0.5
-    2  7  3.4 2.5
+    2  7  2.4 1.5
     3  4  2.4 2.1
-    4  9  2.0 1.4
+    4  9  1.0 2.2
     5  6  1.2 1.5
-    5  8  2.1 2.7
-    5  9  2.6 1.9];
+    5  8  2.1 2.5
+    5  9  1.6 1.9
+    6 10  1.4 1.6];
 
-nNodes= 9;
+nNodes= 10;
 nLinks= size(Links,1);
 nFlows= size(T,1);
 
@@ -56,7 +62,7 @@ n= inf;
 
 tempo= 10;
 
-
+fprintf('\nSolution hill climbing using all possible routing paths\n');
 %Optimization algorithm with multi start hill climbing:
 t= tic;
 bestEnergy= inf;
@@ -147,15 +153,213 @@ while toc(t)<tempo
     end
 end
 figure(1);
+grid on
 plot(sort(allValues));
-legend('Hill Climbing');
-title('No. of hill climbing iterations')
-
-fprintf('MULTI START HILL CLIMBING:\n');
+title('Multi Start Hill Climbing - Task 2.C');
 fprintf('   Best energy = %.1f\n',bestEnergy);
 fprintf('   No. of solutions = %d\n',length(allValues));
 fprintf('   Av. quality of solutions = %.1f\n',mean(allValues));
 
 % o hill climbing nao e muito vantajoso para calcular a energia, normalmente ele nao
 % consegue melhorar a solucao inicial so greeedy randomazed
+
+fprintf('\nSolution hill climbing using 10 shortest routing paths\n');
+%Optimization algorithm with multi start hill climbing:
+t= tic;
+bestEnergy= inf;
+allValues= [];
+contadortotal= [];
+while toc(t)<tempo
+    %GREEDY RANDOMIZED:
+    continuar= true;
+    while continuar
+        continuar= false;
+        ax2= randperm(nFlows);
+        sol= zeros(1,nFlows);
+        for i= ax2
+            k_best= 0;
+            best= inf;
+             n = min(10,nSP(i));
+            for k= 1:n
+                sol(i)= k;
+                Loads= calculateLinkLoads(nNodes,Links,T,sP,sol);
+                load= max(max(Loads(:,3:4)));
+                if load <= 10
+                    energy= 0;
+                    for a= 1:nLinks
+                        if Loads(a,3)+Loads(a,4)>0
+                            energy= energy + L(Loads(a,1),Loads(a,2));
+                        end
+                    end
+                else
+                    energy= inf;
+                end
+                if energy<best
+                    k_best= k;
+                    best= energy;
+                end            
+            end
+            if k_best>0
+                sol(i)= k_best;
+            else
+                continuar= true;
+                break;
+            end
+        end
+    end 
+    energy= best;
+    
+    %HILL CLIMBING:
+    continuar= true;
+    while continuar
+        i_best= 0;
+        k_best= 0;
+        best= energy;
+        for i= 1:nFlows
+            for k= 1:nSP(i)
+                if k~=sol(i)
+                    aux= sol(i);
+                    sol(i)= k;
+                    Loads= calculateLinkLoads(nNodes,Links,T,sP,sol);
+                    load1= max(max(Loads(:,3:4)));
+                    if load1 <= 10
+                        energy1= 0;
+                        for a= 1:nLinks
+                            if Loads(a,3)+Loads(a,4)>0
+                                energy1= energy1 + L(Loads(a,1),Loads(a,2));
+                            end
+                        end
+                    else
+                        energy1= inf;
+                    end
+                    if energy1<best
+                        i_best= i;
+                        k_best= k;
+                        best= energy1;
+                    end
+                    sol(i)= aux;
+                end
+            end
+        end
+        if i_best>0
+            sol(i_best)= k_best;
+            energy= best;
+        else
+            continuar= false;
+        end
+    end    
+    allValues= [allValues energy];
+    if energy<bestEnergy
+        bestSol= sol;
+        bestEnergy= energy;
+    end
+end
+hold on
+grid on
+plot(sort(allValues));
+fprintf('   Best energy = %.1f\n',bestEnergy);
+fprintf('   No. of solutions = %d\n',length(allValues));
+fprintf('   Av. quality of solutions = %.1f\n',mean(allValues));
+
+
+fprintf('\nSolution hill climbing using 5 shortest routing paths\n');
+%Optimization algorithm with multi start hill climbing:
+t= tic;
+bestEnergy= inf;
+allValues= [];
+contadortotal= [];
+while toc(t)<tempo
+    %GREEDY RANDOMIZED:
+    continuar= true;
+    while continuar
+        continuar= false;
+        ax2= randperm(nFlows);
+        sol= zeros(1,nFlows);
+        for i= ax2
+            k_best= 0;
+            best= inf;
+             n = min(5,nSP(i));
+            for k= 1:n
+                sol(i)= k;
+                Loads= calculateLinkLoads(nNodes,Links,T,sP,sol);
+                load= max(max(Loads(:,3:4)));
+                if load <= 10
+                    energy= 0;
+                    for a= 1:nLinks
+                        if Loads(a,3)+Loads(a,4)>0
+                            energy= energy + L(Loads(a,1),Loads(a,2));
+                        end
+                    end
+                else
+                    energy= inf;
+                end
+                if energy<best
+                    k_best= k;
+                    best= energy;
+                end            
+            end
+            if k_best>0
+                sol(i)= k_best;
+            else
+                continuar= true;
+                break;
+            end
+        end
+    end 
+    energy= best;
+    
+    %HILL CLIMBING:
+    continuar= true;
+    while continuar
+        i_best= 0;
+        k_best= 0;
+        best= energy;
+        for i= 1:nFlows
+            for k= 1:nSP(i)
+                if k~=sol(i)
+                    aux= sol(i);
+                    sol(i)= k;
+                    Loads= calculateLinkLoads(nNodes,Links,T,sP,sol);
+                    load1= max(max(Loads(:,3:4)));
+                    if load1 <= 10
+                        energy1= 0;
+                        for a= 1:nLinks
+                            if Loads(a,3)+Loads(a,4)>0
+                                energy1= energy1 + L(Loads(a,1),Loads(a,2));
+                            end
+                        end
+                    else
+                        energy1= inf;
+                    end
+                    if energy1<best
+                        i_best= i;
+                        k_best= k;
+                        best= energy1;
+                    end
+                    sol(i)= aux;
+                end
+            end
+        end
+        if i_best>0
+            sol(i_best)= k_best;
+            energy= best;
+        else
+            continuar= false;
+        end
+    end    
+    allValues= [allValues energy];
+    if energy<bestEnergy
+        bestSol= sol;
+        bestEnergy= energy;
+    end
+end
+hold on
+grid on
+plot(sort(allValues));
+legend('Hill climbing using all possible','Hill climbing using 10 shortest','Hill climbing using 5 shortest',Location="southeast");
+fprintf('   Best energy = %.1f\n',bestEnergy);
+fprintf('   No. of solutions = %d\n',length(allValues));
+fprintf('   Av. quality of solutions = %.1f\n',mean(allValues));
+
+
 

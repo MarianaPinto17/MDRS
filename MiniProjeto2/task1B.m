@@ -1,7 +1,7 @@
 clear all;
 close all;
 
-fprintf("Task 1 - Alinea B\n");
+fprintf('Task 1 - Alinea B\n');
 
 Nodes= [30 70
        350 40
@@ -79,7 +79,7 @@ n= 100;
 %maxLoad= max(max(Loads(:,3:4)));
 
 %Optimization algorithm resorting to the random strategy:
-fprintf("\nSolution random with all possible routing paths\n");
+fprintf('\nSolution random with all possible routing paths\n');
 t= tic; %contagem de tempo tic (comecar a contar) e top (parar de contar)
 bestLoad= inf;
 sol= zeros(1,nFlows);
@@ -103,13 +103,13 @@ end
 figure(1)
 grid on
 plot(sort(allValues));
-title("Random Algorithm - Task 1.B")
+title('Random Algorithm - Task 1.B')
 
-fprintf("Worst link load value of the best solution = %.2f Gbps\n", bestLoad);
-fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %.2f Gbps\n", mean(allValues));
+fprintf('Worst link load value of the best solution = %.2f Gbps\n', bestLoad);
+fprintf('Number of solutions generated = %d \n', length(allValues));
+fprintf('Average quality of all solutions generated = %.2f Gbps\n', mean(allValues));
 
-fprintf("\nSolution random with 10 shortest routing paths\n");
+fprintf('\nSolution random with 10 shortest routing paths\n');
 t= tic;
 bestLoad= inf;
 sol= zeros(1,nFlows);
@@ -136,12 +136,12 @@ hold on
 grid on
 plot(sort(allValues));
 
-fprintf("Worst link load value of the best solution = %.2f Gbps\n", bestLoad);
-fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %.2f Gbps\n", mean(allValues));
+fprintf('Worst link load value of the best solution = %.2f Gbps\n', bestLoad);
+fprintf('Number of solutions generated = %d \n', length(allValues));
+fprintf('Average quality of all solutions generated = %.2f Gbps\n', mean(allValues));
 
 
-fprintf("\nSolution random with 5 shortest routing paths\n");
+fprintf('\nSolution random with 5 shortest routing paths\n');
 t= tic;
 bestLoad= inf;
 sol= zeros(1,nFlows);
@@ -168,6 +168,6 @@ hold on
 grid on
 plot(sort(allValues));
 legend('Random with all possible','Random with 10 shortest','Random with 5 shortest',Location="southeast");
-fprintf("Worst link load value of the best solution = %.2f Gbps\n", bestLoad);
-fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %.2f Gbps\n", mean(allValues));
+fprintf('Worst link load value of the best solution = %.2f Gbps\n', bestLoad);
+fprintf('Number of solutions generated = %d \n', length(allValues));
+fprintf('Average quality of all solutions generated = %.2f Gbps\n', mean(allValues));

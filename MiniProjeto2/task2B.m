@@ -67,13 +67,7 @@ L= round(L);  %Km
 n= 100;
 [sP nSP]= calculatePaths(L,T,n);
 
-%Compute the link loads using the first (shortest) path of each flow:
-%sol= ones(1,nFlows);
-%Loads= calculateLinkLoads(nNodes,Links,T,sP,sol);
-%maxLoad= max(max(Loads(:,3:4)));
-
-
-fprintf("\nSolution greedy ramdomized using all possible routing paths\n");
+fprintf('\nSolution greedy ramdomized using all possible routing paths\n');
 
 t= tic;
 bestEnergyGreedy= inf;
@@ -134,13 +128,13 @@ end
 hold on 
 grid on
 plot(sort(allValues));
-title("Greedy Randomized - Task 2.B")
-fprintf("Energy consumption value of the best solution = %.1f \n", bestEnergyGreedy);
-fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %.1f \n", mean(allValues));
+title('Greedy Randomized - Task 2.B')
+fprintf('Energy consumption value of the best solution = %.1f \n', bestEnergyGreedy);
+fprintf('Number of solutions generated = %d \n', length(allValues));
+fprintf('Average quality of all solutions generated = %.1f \n', mean(allValues));
 
 
-fprintf("\nSolution greedy ramdomized using 10 shortest routing paths\n");
+fprintf('\nSolution greedy ramdomized using 10 shortest routing paths\n');
 t= tic;
 bestEnergyGreedy= inf;
 sol= zeros(1,nFlows);
@@ -199,12 +193,12 @@ end
 hold on
 grid on
 plot(sort(allValues));
-fprintf("Energy consumption value of the best solution = %.1f \n", bestEnergyGreedy);
-fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %.1f \n", mean(allValues));
+fprintf('Energy consumption value of the best solution = %.1f \n', bestEnergyGreedy);
+fprintf('Number of solutions generated = %d \n', length(allValues));
+fprintf('Average quality of all solutions generated = %.1f \n', mean(allValues));
 
 
-fprintf("\nSolution greedy ramdomized using 5 shortest routing paths\n");
+fprintf('\nSolution greedy ramdomized using 5 shortest routing paths\n');
 t= tic;
 bestEnergyGreedy= inf;
 sol= zeros(1,nFlows);
@@ -264,6 +258,6 @@ hold on
 grid on
 plot(sort(allValues));
 legend('Greedy randomized using all possible','Greedy randomized using 10 shortest','Greedy randomized using 5 shortest',Location="southeast");
-fprintf("Energy consumption value of the best solution = %.1f \n", bestEnergyGreedy);
-fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %.1f \n", mean(allValues));
+fprintf('Energy consumption value of the best solution = %.1f \n', bestEnergyGreedy);
+fprintf('Number of solutions generated = %d \n', length(allValues));
+fprintf('Average quality of all solutions generated = %.1f \n', mean(allValues));

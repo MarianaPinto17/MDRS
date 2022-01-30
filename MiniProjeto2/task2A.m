@@ -1,7 +1,7 @@
 clear all;
 close all;
 
-fprintf("Task 2 - Alinea A\n");
+fprintf('Task 2 - Alinea A\n');
 Nodes= [30 70
        350 40
        550 180
@@ -72,7 +72,7 @@ n= 100;
 %Loads= calculateLinkLoads(nNodes,Links,T,sP,sol);
 %maxLoad= max(max(Loads(:,3:4)));
 
-fprintf("\nSolution random with all possible routing paths\n");
+fprintf('\nSolution random with all possible routing paths\n');
 t= tic;
 bestEnergy= inf;
 sol= zeros(1,nFlows);
@@ -113,13 +113,13 @@ end
 figure(1)
 grid on
 plot(sort(allValues));
-title("Random Algorithm - Task 2.A")
-fprintf("Energy consumption value of the best solution = %.1f \n", bestEnergy);
-fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %.1f \n", mean(allValues));
+title('Random Algorithm - Task 2.A')
+fprintf('Energy consumption value of the best solution = %.1f \n', bestEnergy);
+fprintf('Number of solutions generated = %d \n', length(allValues));
+fprintf('Average quality of all solutions generated = %.1f \n', mean(allValues));
 
 
-fprintf("\nSolution random with 10 shortest routing paths\n");
+fprintf('\nSolution random with 10 shortest routing paths\n');
 t= tic;
 bestEnergy= inf;
 sol= zeros(1,nFlows);
@@ -155,12 +155,12 @@ end
 hold on
 grid on
 plot(sort(allValues));
-fprintf("Energy consumption value of the best solution = %.1f \n", bestEnergy);
-fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %.1f \n", mean(allValues));
+fprintf('Energy consumption value of the best solution = %.1f \n', bestEnergy);
+fprintf('Number of solutions generated = %d \n', length(allValues));
+fprintf('Average quality of all solutions generated = %.1f \n', mean(allValues));
 
 
-fprintf("\nSolution random with 5 shortest routing paths\n");
+fprintf('\nSolution random with 5 shortest routing paths\n');
 t= tic;
 bestEnergy= inf;
 sol= zeros(1,nFlows);
@@ -197,6 +197,6 @@ hold on
 grid on
 plot(sort(allValues));
 legend('Random with all possible','Random with 10 shortest','Random with 5 shortest',Location="southeast");
-fprintf("Energy consumption value of the best solution = %.1f \n", bestEnergy);
-fprintf("Number of solutions generated = %d \n", length(allValues));
-fprintf("Average quality of all solutions generated = %.1f \n", mean(allValues));
+fprintf('Energy consumption value of the best solution = %.1f \n', bestEnergy);
+fprintf('Number of solutions generated = %d \n', length(allValues));
+fprintf('Average quality of all solutions generated = %.1f \n', mean(allValues));
